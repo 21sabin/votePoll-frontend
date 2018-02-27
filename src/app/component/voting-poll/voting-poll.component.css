@@ -1,0 +1,11 @@
+body{
+    background-color:gray;
+}
+h1{
+    font-family:cursive;
+    font-weight: bold;
+}
+
+button{
+    margin-top:30px;
+}

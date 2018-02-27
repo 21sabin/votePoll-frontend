@@ -1,0 +1,12 @@
+h1{
+    font-weight:bold;
+    font-family:cursive;
+}
+h3{
+    color:red;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+input[name=question]:focus{
+    border:1px solid red;
+}
