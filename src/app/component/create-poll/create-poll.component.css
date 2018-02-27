@@ -10,3 +10,7 @@ h3{
 input[name=question]:focus{
     border:1px solid red;
 }
+.error{
+    border-color:red !important; 
+}
+

@@ -12,13 +12,17 @@
 
 
       <hr>
-      <form [formGroup]="form" (ngSubmit)="createPoll()">
+      <form [formGroup]="form" (ngSubmit)="setDisable()">
 
         <h3>{{addChoiceError}}</h3>
 
+        <!-- <div class="form-group">
+          <label for="exampleInputEmail1">*Question</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" formControlName="question" placeholder="Enter poll" [ngClass]="{'error':form.value.question=='' ||form.value.question==null&&form.touched===true}">
+        </div> -->
         <div class="form-group">
           <label for="exampleInputEmail1">*Question</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" formControlName="question" placeholder="Enter poll">
+          <input type="text" class="form-control" id="exampleInputEmail1" formControlName="question" placeholder="Enter poll" [ngClass]="{'error':form.touched&&form.controls.question.invalid}">
         </div>
 
         <div *ngIf="form.get('question').touched && form.get('question').hasError('required')">
@@ -28,22 +32,50 @@
 
         <div class="form-group" *ngFor="let c of count;let i=index">
           <!-- <ng-container *ngIf="countOption<5"> -->
-          <input type="text" class="form-control" id="exampleInputPassword1" formControlName="choice{{i+1}}" placeholder="choice- {{i+1}}">
+          <input type="text" class="form-control" id="exampleInputPassword1" formControlName="choice{{i}}" placeholder="choice- {{i+1}}"
+            [ngClass]="{'error':form.get('choice'+i).touched && form.get('choice'+i).hasError('required')}">
           <!-- </ng-container> -->
+          <!-- <div *ngIf="form.get('choice'+i).touched && form.get('choice'+i).hasError('required')">
+              <p>choice{{i}} is required</p>
+            </div> -->
+        </div>
+
+
+        <button type="submit" class="btn btn-default btn-md" (click)="addOption()" [disabled]="countOption>4">
+          <span class="glyphicon glyphicon-plus-sign">Add another</span>
+        </button>
+        <br>
+        <br>
+
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Is anonymous</label>
+          <select formControlName="isAnonymous" name="isAnonymous">
+            <option value="true" selected>True</option>
+            <option value="false">False</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">*start Date</label>
+          <input type="date" class="form-control" formControlName="startDate" id="exampleInputEmail1" placeholder="Enter Start date">
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">*End Date</label>
+          <input type="date" class="form-control"  formControlName="endDate" 
+          id="exampleInputEmail1"  placeholder="Enter End date">
+         <!-- // <p style="color:red;float:right;" *ngIf="form.get('endDate').touched && form.get('endDate').hasError('required')">*Enter End Date*</p> -->
         </div>
 
         <!-- <div class="form-group" *ngIf="countOption===2">
           <input type="text" class="form-control" id="exampleInputPassword1" formControlName="choice5" placeholder="choice5">
         </div> -->
 
-        <button type="submit" class="btn btn-default btn-md" (click)="addOption()" [disabled]="countOption>4">
-          <span class="glyphicon glyphicon-plus-sign">Add another</span>
-        </button>
-
-        <br>
         <br>
 
-        <button type="submit" class="btn btn-default">Create Poll</button>
+        <button type="submit" class="btn btn-primary"  >Create Poll</button>
 
       </form>
 
