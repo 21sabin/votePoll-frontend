@@ -9,6 +9,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { CreatePollComponent } from './component/create-poll/create-poll.component';
 import {routing} from './app.routes';
 import {ReactiveFormsModule} from '@angular/forms'
+import {PollServiceService} from './service/poll-service.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import {ReactiveFormsModule} from '@angular/forms'
     routing,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [PollServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

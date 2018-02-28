@@ -12,7 +12,8 @@
 
 
       <hr>
-      <form [formGroup]="form" (ngSubmit)="setDisable()">
+      <p>{{pollMessage}}</p>
+      <form [formGroup]="form" (ngSubmit)="createPoll()">
 
         <h3>{{addChoiceError}}</h3>
 
@@ -41,7 +42,7 @@
         </div>
 
 
-        <button type="submit" class="btn btn-default btn-md" (click)="addOption()" [disabled]="countOption>4">
+        <button type="button" class="btn btn-default btn-md" (click)="addOption()" [disabled]="countOption>4">
           <span class="glyphicon glyphicon-plus-sign">Add another</span>
         </button>
         <br>
@@ -75,7 +76,7 @@
 
         <br>
 
-        <button type="submit" class="btn btn-primary"  >Create Poll</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid" >Create Poll</button>
 
       </form>
 

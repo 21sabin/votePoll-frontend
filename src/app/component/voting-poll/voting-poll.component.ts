@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {PollServiceService} from './../../service/poll-service.service';
+import { PollModel } from '../../model/pollModel';
 
 @Component({
   selector: 'app-voting-poll',
@@ -8,13 +10,22 @@ import {Router} from '@angular/router';
 })
 export class VotingPollComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  polls:PollModel[]=[];
+
+  constructor(private router:Router,private pollService:PollServiceService) { }
 
   createPoll(){
     this.router.navigateByUrl('/createPoll');
   }
 
   ngOnInit() {
+    this.pollService.getPolls()
+    .subscribe(
+     (poll:PollModel[])=>{
+      this.polls=poll;
+      console.log("poll list",this.polls)
+     }
+    )
   }
 
 }

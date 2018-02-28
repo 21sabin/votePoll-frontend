@@ -8,13 +8,34 @@
           <button type="button" class="btn btn-default" (click)="createPoll()">
             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true">New Poll</span>
           </button>
-          <a ></a>
+          <a></a>
         </div>
         <div class="col-sm-4">
           <input type="text" class="form-control">
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <h2>Poll List</h2>
+      <!-- <ul type="circle">
+        <li *ngFor="let poll of polls">{{poll.poll}}</li>
+      </ul> -->
+      <table class=" table table-hover table table-condensed">
+        <tr>
+          <th>Qno</th>
+          <th>Poll</th>
+          <th>Action</th>
+        </tr>
+        <tr *ngFor="let poll of polls;let i=index">
+          <td>{{i+1}}</td>
+          <td>{{poll.poll}}</td>
+          <td><button type="button" class="btn btn-primary btn-sm">Vote</button></td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
