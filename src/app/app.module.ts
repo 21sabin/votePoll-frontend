@@ -10,13 +10,17 @@ import { CreatePollComponent } from './component/create-poll/create-poll.compone
 import {routing} from './app.routes';
 import {ReactiveFormsModule} from '@angular/forms'
 import {PollServiceService} from './service/poll-service.service';
+import {VotesComponent} from './component/voting-poll/votes/votes.component'
+
 
 @NgModule({
   declarations: [
     AppComponent,
     VotingPollComponent,
     HeaderComponent,
-    CreatePollComponent
+    CreatePollComponent,
+    VotesComponent
+  
   ],
   imports: [
     BrowserModule,

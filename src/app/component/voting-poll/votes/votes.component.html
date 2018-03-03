@@ -1,0 +1,29 @@
+
+
+<div class="container">
+ 
+  <div class="row">
+    <div class="col-sm-8">
+      <hr>
+      <div class="well well-lg" role="alert">
+        <h4><b>Question:</b></h4>
+        {{poll}}
+      </div>
+      <div class="options" *ngFor="let option of options">
+        <label class="checkbox-inline"><input type="radio" name="option" (click)="selectOption(option)">{{option}}</label>
+        <br>
+      </div>
+    </div>
+  </div>
+<br><br>
+  <div class="row">
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left" (click)="indexPoll()">Back TO PollList</button>
+    </div>
+    <div class="col-sm-4 col-sm-offset-4">
+      <button type="button" class="btn btn-primary" >Vote</button>
+    </div>  
+
+
+
+</div>

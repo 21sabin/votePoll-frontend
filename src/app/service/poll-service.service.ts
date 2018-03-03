@@ -31,8 +31,9 @@ export class PollServiceService {
     .map((res:Response)=>{
       const polls=res.json().obj;
      let transformPoll:PollModel[]=[];
-      for(let poll of polls ){
-        let poll=new PollModel(polls[0].poll,polls[0].options[0].options);
+      for(let p of polls ){
+        console.log("getpolls service",p._id)
+        let poll=new PollModel(p.poll,p.options[0].options,p.isAnonymous,p.startDate,p.endDate,p._id);
         transformPoll.push(poll);
       }
       this.polls=transformPoll;
@@ -41,4 +42,13 @@ export class PollServiceService {
     .catch((err:Response)=>Observable.throw(err.json()))
   }
 
+
+  getPollById(pollId:any){
+    console.log("inside service get poll by id",pollId)
+    return this.http.get("http://localhost:3000/api/polls/"+pollId)
+    .map((res:Response)=>res.json())
+    .catch((error:Response)=>Observable.throw(error.json()))
+  }
+ 
 }
+

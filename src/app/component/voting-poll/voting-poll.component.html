@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="display;else votePoll">
   <div class="row">
     <div class="col-sm-8">
       <h1>Poll List</h1>
@@ -20,22 +20,16 @@
 
   <div class="row">
     <div class="col-sm-8">
-      <h2>Poll List</h2>
-      <!-- <ul type="circle">
-        <li *ngFor="let poll of polls">{{poll.poll}}</li>
-      </ul> -->
-      <table class=" table table-hover table table-condensed">
-        <tr>
-          <th>Qno</th>
-          <th>Poll</th>
-          <th>Action</th>
-        </tr>
-        <tr *ngFor="let poll of polls;let i=index">
-          <td>{{i+1}}</td>
-          <td>{{poll.poll}}</td>
-          <td><button type="button" class="btn btn-primary btn-sm">Vote</button></td>
-        </tr>
-      </table>
+      <h2>Polls</h2>
+      <ul type="circle" class="list-group">
+        <a *ngFor="let poll of polls" class="list-group-item" (click)="getPollById(poll.pollId)" >{{poll.poll}}<br></a>
+      </ul>
     </div>
   </div>
 </div>
+
+<ng-template #votePoll>
+  <h1>Poll</h1>
+  <app-votes (displayFlag)="receiveFlag($event)" *ngIf="pollId" [pollId]="pollId"></app-votes>
+  <!-- <router-outlet></router-outlet> -->
+</ng-template>

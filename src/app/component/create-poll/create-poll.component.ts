@@ -55,14 +55,15 @@ export class CreatePollComponent implements OnInit {
 
   createPoll() {
    let options = [];
+   console.log("form",this.form)
     for (let i = 0; i < this.count.length; i++) {
       // console.log("options",this.form.get('choice'+i).value);
      options.push(this.form.get('choice' + i).value)
     }
-    let poll = new PollModel(this.form.value.question, options);
+    let poll = new PollModel(this.form.value.question, options,this.form.value.isAnonymous,this.form.value.startDate,this.form.value.endDate);
     this.pollService.addPolls(poll)
     .subscribe(()=>
-      poll=>alert("Poll added sucessfully"),
+      poll=>console.log("create poll",poll),
       error=>console.error(error)
     )
   }
