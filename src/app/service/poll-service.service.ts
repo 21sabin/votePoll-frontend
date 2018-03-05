@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http,Response,Headers} from '@angular/http';
 import {PollModel} from './../model/pollModel';
+import {VoteModel} from '../model/voteModel'
 
 import 'rxjs/Rx';
 import {Observable} from 'rxjs/Rx';
@@ -18,7 +19,6 @@ export class PollServiceService {
 
   addPolls(pollModel:PollModel){
     // const poll=JSON.stringify(pollModel);
-    console.log("inside service",pollModel)
     let headers=new Headers({'Content-Type':'application/json'})
     return this.http.post("http://localhost:3000/api/polls",pollModel,{headers:headers})
     .map((res:Response)=>res.json())
@@ -32,7 +32,6 @@ export class PollServiceService {
       const polls=res.json().obj;
      let transformPoll:PollModel[]=[];
       for(let p of polls ){
-        console.log("getpolls service",p._id)
         let poll=new PollModel(p.poll,p.options[0].options,p.isAnonymous,p.startDate,p.endDate,p._id);
         transformPoll.push(poll);
       }
@@ -44,11 +43,38 @@ export class PollServiceService {
 
 
   getPollById(pollId:any){
-    console.log("inside service get poll by id",pollId)
     return this.http.get("http://localhost:3000/api/polls/"+pollId)
     .map((res:Response)=>res.json())
     .catch((error:Response)=>Observable.throw(error.json()))
   }
- 
+
+
+  vote(vote:VoteModel){
+    console.log(vote)
+    let headers=new Headers({'Content-Type':'application/json'});
+    return this.http.post("http://localhost:3000/api/votes",vote,{headers:headers})
+    .map((res:Response)=>res.json())
+    .catch((err:Response)=>Observable.throw(err.json()))
+  }
+
+  voteTotal(pollId:any){
+    return this.http.get("http://localhost:3000/api/votes/count/"+pollId)
+    .map((res:Response)=>res.json())
+    .catch((err:Response)=>Observable.throw(err.json()))
+  }
+
+  votingResult(pollId:any,options:any){
+    var request={
+      pollId:pollId,
+      options:options
+    }
+    let headers=new Headers({'Content-Type':'application/json'});
+    return this.http.post("http://localhost:3000/api/votes/counts",request,{headers:headers})
+    .map((res:Response)=>res.json())
+    .catch((err:Response)=>Observable.throw(err.json()))
+    
+  }
+
+
 }
 

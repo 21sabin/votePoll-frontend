@@ -9,11 +9,12 @@
         <h4><b>Question:</b></h4>
         {{poll}}
       </div>
-      <div class="options" *ngFor="let option of options">
-        <label class="checkbox-inline"><input type="radio" name="option" (click)="selectOption(option)">{{option}}</label>
+      <h2 id="selecOption">Please select One of the option</h2>
+      <div class="options" *ngFor="let option of options;let i=index">
+        <label class="checkbox-inline"><input type="radio" name="op" [value]="options" (click)="getOption(option)" [checked]="i===0" >{{option}}</label>
         <br>
       </div>
-    </div>
+    </div> 
   </div>
 <br><br>
   <div class="row">
@@ -21,9 +22,9 @@
       <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left" (click)="indexPoll()">Back TO PollList</button>
     </div>
     <div class="col-sm-4 col-sm-offset-4">
-      <button type="button" class="btn btn-primary" >Vote</button>
+      <button type="button" class="btn btn-primary" (click)="selectOption(pollId,op)" >Vote</button>
     </div>  
-
+<p>Total no of vote:{{totalVote}}</p>
 
 
 </div>

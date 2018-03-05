@@ -3,6 +3,7 @@ import { Component, OnInit,Output, EventEmitter,Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {ActivatedRoute,Params} from '@angular/router';
 import {PollServiceService} from '../../../service/poll-service.service';
+import {VoteModel} from '../../../model/voteModel';
 
 @Component({
   selector: 'app-votes',
@@ -19,11 +20,26 @@ export class VotesComponent implements OnInit {
   @Input() pollId:any;
   options:Array<any>;
   poll:any;
+  op:String;
+  totalVote:number=0;
 
 
 
-  selectOption(options:any){
-    console.log(options,"options")
+  selectOption(pollId:String,option:any){
+    console.log("select optioni",pollId)
+    let vote=new VoteModel(pollId,option);
+    this.pollService.vote(vote)
+    .subscribe(
+      vote=>console.log(vote),
+      error=>console.error(error)
+    );
+
+     this.pollService.votingResult(this.pollId,this.options)
+     .subscribe(
+       count=>console.log(count)
+     );
+     
+    
   }
 
   
@@ -36,7 +52,11 @@ export class VotesComponent implements OnInit {
   }
 
   ngOnInit() {
-      // console.log("polls",this.polls)
+   
+  }
+
+  getOption(option:any){
+    this.op=option
   }
 
   ngOnChanges(){
@@ -44,11 +64,20 @@ export class VotesComponent implements OnInit {
         poll=>{
           this.options=poll.options.options;
           this.poll=poll.poll.poll;
-          console.log("poll",this.options);
-          console.log("poll",this.poll)
         },
         error=>console.error(error)
+      );
+
+
+      this.pollService.voteTotal(this.pollId).subscribe(
+        count=>this.totalVote=count.count
       )
+
+     
+      
   }
+
+ 
+ 
 
 }
