@@ -42,4 +42,10 @@ export class VotingPollComponent implements OnInit {
     )
   }
 
+
+  adminPage(){
+    console.log("adminpage")
+    this.router.navigateByUrl('/adminLogin');
+  }
+
 }

@@ -18,3 +18,7 @@ ul li:hover{
 h2 #poll{
     color:blue;
 }
+
+#adminButton{
+    float:right;
+}

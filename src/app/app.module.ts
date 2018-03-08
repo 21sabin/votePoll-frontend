@@ -10,7 +10,10 @@ import { CreatePollComponent } from './component/create-poll/create-poll.compone
 import {routing} from './app.routes';
 import {ReactiveFormsModule} from '@angular/forms'
 import {PollServiceService} from './service/poll-service.service';
-import {VotesComponent} from './component/voting-poll/votes/votes.component'
+import {VotesComponent} from './component/voting-poll/votes/votes.component';
+import { LoginComponent } from './component/admin/login/login.component';
+
+
 
 
 @NgModule({
@@ -19,7 +22,8 @@ import {VotesComponent} from './component/voting-poll/votes/votes.component'
     VotingPollComponent,
     HeaderComponent,
     CreatePollComponent,
-    VotesComponent
+    VotesComponent,
+    LoginComponent
   
   ],
   imports: [

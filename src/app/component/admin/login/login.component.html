@@ -1,0 +1,30 @@
+<button type="button" class="btn btn-default btn-sm" (click)="indexPoll()">
+    <i class="fas fa-arrow-left"></i>Poll List</button>
+  <div class="container">
+  
+    <h2>User Login</h2>
+  
+    <form (ngSubmit)="onLogin(f)" #f=ngForm>
+     
+      <div class="form-group">
+        <label for="exampleInputEmail1">*Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" name="email" [(ngModel)]="email" required #email1="ngModel">
+        <p *ngIf="!email1.valid && email1.touched">
+          Email is required !
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputPassword1">*Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" [(ngModel)]="password"  required  #pass="ngModel">
+       
+        <p *ngIf="!pass.valid && pass.touched">
+            Email is required !
+          </p>
+      </div>
+     
+  
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  
+  </div>

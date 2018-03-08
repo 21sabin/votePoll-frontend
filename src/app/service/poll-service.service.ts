@@ -15,7 +15,10 @@ export class PollServiceService {
 
   polls:PollModel[]=[];
 
+  
+
   constructor(private http:Http) { }
+  
 
   addPolls(pollModel:PollModel){
     // const poll=JSON.stringify(pollModel);
@@ -50,7 +53,7 @@ export class PollServiceService {
 
 
   vote(vote:VoteModel){
-    console.log(vote)
+    console.log(vote,"vote")
     let headers=new Headers({'Content-Type':'application/json'});
     return this.http.post("http://localhost:3000/api/votes",vote,{headers:headers})
     .map((res:Response)=>res.json())
@@ -63,13 +66,12 @@ export class PollServiceService {
     .catch((err:Response)=>Observable.throw(err.json()))
   }
 
-  votingResult(pollId:any,options:any){
-    var request={
-      pollId:pollId,
-      options:options
-    }
+  votingResult(pollId:any){
+    console.log("pilld",pollId)
     let headers=new Headers({'Content-Type':'application/json'});
-    return this.http.post("http://localhost:3000/api/votes/counts",request,{headers:headers})
+    let url="http://localhost:3000/api/votes/counts/"+pollId;
+    // console.log(url,"url")
+    return this.http.get(url)
     .map((res:Response)=>res.json())
     .catch((err:Response)=>Observable.throw(err.json()))
     
